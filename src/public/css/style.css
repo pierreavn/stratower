@@ -1,0 +1,23 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.ag-theme-alpine {
+    --ag-alpine-active-color: var(--tblr-primary) !important;
+}
+
+#datatable {
+    width: 100%;
+    height: calc(100vh - 3.5rem - 2 * var(--tblr-content-padding));
+}
+
+.ag-root-wrapper {
+    border: var(--tblr-border-width) solid var(--tblr-border-color) !important;
+    border-radius: var(--tblr-border-radius) !important;
+}
+
+.ag-header {
+    background: var(--tblr-bg-surface-tertiary) !important;
+}

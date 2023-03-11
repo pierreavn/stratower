@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stratower</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="public/css/tabler.min.css" />
+    <link rel="stylesheet" href="public/css/ag-grid.min.css" />
+    <link rel="stylesheet" href="public/css/ag-theme-alpine.min.css" />
+    <link rel="stylesheet" href="public/css/style.css" />
+
+    <!-- Scripts -->
+    <script defer src="public/js/ag-grid-enterprise.min.js"></script>
+    <script defer src="public/js/tabler.min.js"></script>
+    <script defer src="public/js/context.js"></script>
+    <script defer src="provider-public/scaleway/js/script.js"></script>
+    <script defer src="public/js/script.js"></script>
+</head>
+
+<body>
+    <div id="page-error" class="page page-center" style="display: none;">
+        <div class="container-tight py-4">
+            <div class="empty">
+                <div class="empty-header">Oops</div>
+                <p class="empty-title">The configuration is invalid</p>
+                <p class="empty-subtitle text-muted" id="config-error-message"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-main" class="page">
+        <!-- Navbar -->
+        <header class="navbar navbar-expand-md navbar-light d-print-none">
+            <div class="container-xl">
+                <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                    <a href="#">
+                        <img src="public/img/logo.svg" height="32" alt="Stratower" class="navbar-brand-image">
+                    </a>
+                </h1>
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
+                        <ul class="navbar-nav">
+                            <template id="template-cluster">
+                                <li class="nav-item" data-cluster="cluster">
+                                    <a class="nav-link" href="#cluster">
+                                        <span style="display: none !important;"
+                                            class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <img class="icon"
+                                                src="https://cdn.jsdelivr.net/npm/@tabler/icons@2.10.0/icons/cloud.svg" />
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Name
+                                        </span>
+                                    </a>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="btn-list">
+                    <div class="btn-group" role="group">
+                        <label id="priceUnitLabel" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            € / hour
+                        </label>
+                        <div class="dropdown-menu">
+                            <label class="dropdown-item">
+                                <input class="form-check-input m-0 me-2" type="radio" name="priceUnit" checked
+                                    onchange="setPriceUnit('hour')">
+                                € / hour
+                            </label>
+                            <label class="dropdown-item">
+                                <input class="form-check-input m-0 me-2" type="radio" name="priceUnit"
+                                    onchange="setPriceUnit('day')">
+                                € / day
+                            </label>
+                            <label class="dropdown-item">
+                                <input class="form-check-input m-0 me-2" type="radio" name="priceUnit"
+                                    onchange="setPriceUnit('month')">
+                                € / month
+                            </label>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                                <path d="M7 11l5 5l5 -5"></path>
+                                <path d="M12 4l0 12"></path>
+                            </svg>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="#" onclick="exportDataAsExcel()">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="icon icon-tabler icon-tabler-brand-office me-2" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 18h9v-12l-5 2v5l-4 2v-8l9 -4l7 2v13l-7 3z"></path>
+                                </svg>
+                                Export to Excel
+                            </a>
+                            <a class="dropdown-item" href="#" onclick="exportDataAsCsv()">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="icon icon-tabler icon-tabler-file-analytics me-2" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z">
+                                    </path>
+                                    <path d="M9 17l0 -5"></path>
+                                    <path d="M12 17l0 -1"></path>
+                                    <path d="M15 17l0 -3"></path>
+                                </svg>
+                                Export to CSV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="page-wrapper">
+            <div class="page-body">
+                <div class="container-xl">
+                    <div id="datatable" class="ag-theme-alpine" style="display: none;"></div>
+                    <div id="loader" class="container container-slim py-5">
+                        <div class="text-center">
+                            <div class="text-muted mb-3">Watching clouds</div>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar progress-bar-indeterminate"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Docker Hub Login
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Build Docker image
+      run: docker build -t ${{secrets.DOCKER_USER}}/stratower:${GITHUB_SHA:0:7} .
+    - name: Tag Docker images and push to Docker Hub
+      run: |
+        IMAGE_NAME=${{secrets.DOCKER_USER}}/stratower
+        IMAGE_TAG_BASE=$IMAGE_NAME:${GITHUB_SHA:0:7}
+
+        # Commit
+        docker push $IMAGE_TAG_BASE
+
+        # Latest
+        docker tag $IMAGE_TAG_BASE $IMAGE_NAME:latest
+        docker push $IMAGE_NAME:latest
+
+        # Version x.y.z
+        docker tag $IMAGE_TAG_BASE $IMAGE_NAME:$(cat version)
+        docker push $IMAGE_NAME:$(cat version)
+
+        # Version x.y
+        docker tag $IMAGE_TAG_BASE $IMAGE_NAME:$(cat version | cut -d. -f1).$(cat version | cut -d. -f2)
+        docker push $IMAGE_NAME:$(cat version | cut -d. -f1).$(cat version | cut -d. -f2)
+
+        # Version x
+        docker tag $IMAGE_TAG_BASE $IMAGE_NAME:$(cat version | cut -d. -f1)
+        docker push $IMAGE_NAME:$(cat version | cut -d. -f1)

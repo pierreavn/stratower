@@ -1,9 +1,14 @@
 <img src="docs/assets/header.png" alt="stratower header" height="100">
-<br/>
+
 Stratower is a simple dashboard to track Cloud resources consumption.
+
+## Screenshots
+
+<img src="docs/assets/screenshots/scaleway.png" alt="stratower scaleway" height="400">
 
 ## Security
 To ensure API keys of Cloud providers are safe and never sent somewhere, Stratower is based on [Deno](http://deno.land/) with minimalist network permissions.  
+
 For more information, see [`bin/stratower`](bin/stratower) file.
 
 ## Getting Started
@@ -17,7 +22,7 @@ docker run -d \
     -e STRATOWER_Scaleway_PROVIDER=scaleway \
     -e STRATOWER_Scaleway_ORGANIZATION_ID=<org-id> \
     -e STRATOWER_Scaleway_AUTH_TOKEN=<auth-token> \
-    stratower:latest
+    stratower/stratower:latest
 ```
 
 or from source:

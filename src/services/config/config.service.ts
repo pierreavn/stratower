@@ -71,7 +71,7 @@ export class ConfigService {
      */
     static getPort(): number | undefined {
         const envKey = 'PORT';
-        const port = parseInt(env()[envKey] ?? Deno.env.get(envKey));
+        const port = parseInt(Deno.env.get(envKey) ?? env()[envKey]);
         return isNaN(port) ? undefined : port;
     }
 
@@ -83,7 +83,7 @@ export class ConfigService {
      */
     private static getEnvVar(key: string, clusterKey?: string): string | undefined {
         const envKey = `STRATOWER_${clusterKey ? `${clusterKey}_` : ''}${key}`;
-        return env()[envKey] ?? Deno.env.get(envKey);
+        return Deno.env.get(envKey) ?? env()[envKey];
     }
 
     /**

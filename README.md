@@ -1,8 +1,10 @@
-# Stratower
-
-<img src="src/public/img/logo.svg" alt="stratower logo" height="50">
-
+<img src="docs/assets/header.png" alt="stratower header" height="100">
+<br/>
 Stratower is a simple dashboard to track Cloud resources consumption.
+
+## Security
+To ensure API keys of Cloud providers are safe and never sent somewhere, Stratower is based on [Deno](http://deno.land/) with minimalist network permissions.  
+For more information, see [`bin/stratower`](bin/stratower) file.
 
 ## Getting Started
 

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Allowed domains to connect to
+STRATOWER_ALLOW_NET=api.scaleway.com
+
+# Default port
+if [[ -z "${PORT}" ]]; then
+    PORT=8080
+fi
+
+# Start Stratower
+deno run --allow-env --allow-read=. --allow-net="$STRATOWER_ALLOW_NET,0.0.0.0:$PORT" src/index.ts

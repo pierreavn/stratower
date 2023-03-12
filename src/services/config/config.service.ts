@@ -7,8 +7,6 @@ import { Config, ConfigCluster } from "./config.interfaces.ts";
  * Configuration service
  */
 export class ConfigService {
-    static readonly VERSION = '1.0.0';
-
     static config: Config;
     static isValid = false;
     static error: string | null = null;
@@ -16,16 +14,17 @@ export class ConfigService {
     /**
      * Load configuration
      */
-    static load(): void {
+    static load(version: string): void {
+        ConfigService.config = {
+            version,
+            clusters: [],
+        };
+
         LoggerService.info(`Loading configuration`);
         const clustersVar = ConfigService.getEnvVar('CLUSTERS');
         if (!clustersVar) {
             return ConfigService.setInvalid('Missing STRATOWER_CLUSTERS env variable');
         }
-
-        ConfigService.config = {
-            clusters: [],
-        };
 
         // Parse clusters
         for (const clusterKey of clustersVar.split(',')) {
@@ -71,7 +70,8 @@ export class ConfigService {
      * @returns 
      */
     static getPort(): number | undefined {
-        const port = parseInt(env()[`PORT`]);
+        const envKey = 'PORT';
+        const port = parseInt(env()[envKey] ?? Deno.env.get(envKey));
         return isNaN(port) ? undefined : port;
     }
 
@@ -82,7 +82,8 @@ export class ConfigService {
      * @returns 
      */
     private static getEnvVar(key: string, clusterKey?: string): string | undefined {
-        return env()[`STRATOWER_${clusterKey ? `${clusterKey}_` : ''}${key}`];
+        const envKey = `STRATOWER_${clusterKey ? `${clusterKey}_` : ''}${key}`;
+        return env()[envKey] ?? Deno.env.get(envKey);
     }
 
     /**

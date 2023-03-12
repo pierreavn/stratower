@@ -19,7 +19,10 @@
     <script defer src="public/js/ag-grid-enterprise.min.js"></script>
     <script defer src="public/js/tabler.min.js"></script>
     <script defer src="public/js/context.js"></script>
+
+    <!-- Providers Scripts -->
     <script defer src="provider-public/scaleway/js/script.js"></script>
+
     <script defer src="public/js/script.js"></script>
 </head>
 
@@ -101,7 +104,7 @@
                             </svg>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="#" onclick="exportDataAsExcel()">
+                            <a class="dropdown-item" href="javascript:exportDataAsExcel()">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="icon icon-tabler icon-tabler-brand-office me-2" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -111,7 +114,7 @@
                                 </svg>
                                 Export to Excel
                             </a>
-                            <a class="dropdown-item" href="#" onclick="exportDataAsCsv()">
+                            <a class="dropdown-item" href="javascript:exportDataAsCsv()">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="icon icon-tabler icon-tabler-file-analytics me-2" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"

@@ -10,10 +10,10 @@ Here are Scaleway features supported by Stratower:
   * ❌ Elastic Metal
   * ❌ Apple silicon
 * Containers:
-  * ❌ Container Registry
+  * ✅ Container Registry
 * Serverless:
-  * ❌ Functions
-  * ❌ Containers
+  * ✅ Functions
+  * ✅ Containers
   * ❌ Messaging
 * Storage:
   * ❌ Object Storage
@@ -52,7 +52,7 @@ Cloud provider of the given cluster
 STRATOWER_foo_PROVIDER=scaleway
 ```
 
-* `STRATOWER_<cluster>_NAME` _(**required**, string)_  
+* `STRATOWER_<cluster>_NAME` _(optional, string)_  
 Name of the given cluster
 
 ```bash

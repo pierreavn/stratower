@@ -1,8 +1,11 @@
 import { ConfigCluster } from "../../services/config/config.interfaces.ts";
 import { Provider } from "../../services/providers/providers.interfaces.ts";
 import { ScalewayApi } from "./api/base.ts";
+import { ScalewayApiContainerRegistries } from "./api/container-registries.ts";
 import { ScalewayApiInstances } from "./api/instances.ts";
 import { ScalewayApiIPs } from "./api/ip.ts";
+import { ScalewayApiServerlessContainers } from "./api/serverless-containers.ts";
+import { ScalewayApiServerlessFunctions } from "./api/serverless-function.ts";
 import { ScalewayApiSnapshots } from "./api/snapshots.ts";
 import { ScalewayApiVolumes } from "./api/volumes.ts";
 import { ScalewayResources } from "./interfaces.ts";
@@ -34,6 +37,9 @@ export class ScalewayProvider implements Provider {
                 new ScalewayApiIPs(cluster).fetchIPs(),
                 new ScalewayApiVolumes(cluster).fetchVolumes(),
                 new ScalewayApiSnapshots(cluster).fetchSnapshots(),
+                new ScalewayApiContainerRegistries(cluster).fetchContainerRegistries(),
+                new ScalewayApiServerlessContainers(cluster).fetchServerlessContainers(),
+                new ScalewayApiServerlessFunctions(cluster).fetchServerlessFunctions(),
             ])).flat(1)
         };
     }

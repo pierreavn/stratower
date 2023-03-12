@@ -7,7 +7,7 @@ class ResourceTypeRenderer {
       } else if (params.value === '(Select All)') {
         this.eGui.innerHTML = params.value;
       } else {
-        const url = `provider-public/scaleway/img/resources/${params.value.toLowerCase()}.svg`;
+        const url = `provider-public/scaleway/img/resources/${params.value.toLowerCase().replaceAll(' ', '-')}.svg`;
         const resourceImage = `<img class="resource" src="${url}" alt="${params.value}" width="28">`;
 
         this.eGui.innerHTML = `${resourceImage}&nbsp;&nbsp;&nbsp;${params.value}`;
@@ -108,7 +108,7 @@ context.renderers['scaleway'] = (data) => {
             { headerName: 'Project', field: 'project', filter: 'agSetColumnFilter', rowGroup: true, hide: true },
             { headerName: 'Type', field: 'type', filter: 'agSetColumnFilter', cellRenderer: ResourceTypeRenderer },
             { headerName: 'Name', field: 'name', width: 350, cellRenderer: ResourceNameRenderer },
-            { headerName: 'Zone', field: 'zone', filter: 'agSetColumnFilter', cellRenderer: ResourceZoneRenderer, width: 160 },
+            { headerName: 'Zone / Region', field: 'zone', filter: 'agSetColumnFilter', cellRenderer: ResourceZoneRenderer, width: 160 },
             { headerName: 'Quantity', field: 'quantity', width: 160, cellRenderer: ResourceQuantityRenderer },
             { headerName: `Price (€ / ${context.prices.unit})`, field: 'price', filter: 'agNumberColumnFilter', width: 160 },
         ],

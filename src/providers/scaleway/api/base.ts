@@ -52,6 +52,25 @@ export class ScalewayApi {
     }
 
     /**
+     * Do GET request to the Scaleway API on all regions
+     * @param endpoint 
+     * @returns 
+     */
+    public requestAllRegions = async <T = unknown>(endpoint: string, options?: ScalewayApiRequestOptions): Promise<Record<string, T>> => {
+        const requests = await Promise.all(
+            ScalewayApi.REGIONS.map(region => this.request(endpoint.replaceAll("{region}", region), options))
+        );
+
+        const response: Record<string, T> = {};
+        requests.forEach((request, i) => {
+            const region = ScalewayApi.REGIONS[i];
+            response[region] = request as T;
+        });
+
+        return response;
+    }
+
+    /**
      * Do GET request to the Scaleway API on all zones
      * @param endpoint 
      * @returns 

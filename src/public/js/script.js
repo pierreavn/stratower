@@ -53,13 +53,8 @@ function loadCluster() {
   fetch(`/_cluster/${encodeURIComponent(clusterKey)}`)
     .then(res => res.json())
     .then((data) => {
-      const eGridDiv = document.querySelector('#datatable');
-      eGridDiv.innerHTML = "";
-      
-      context.gridOptions = context.renderers[context.cluster.provider.key](data);
-      new agGrid.Grid(eGridDiv, context.gridOptions);
-
-      setLoader(false);
+      context.data = data;
+      renderData();
     });
 }
 
@@ -80,4 +75,16 @@ function exportDataAsCsv() {
 function setLoader(isLoading) {
   document.querySelector('#datatable').style.display = isLoading ? "none" : "block";
   document.querySelector('#loader').style.display = isLoading ? "block" : "none";
+}
+
+function renderData() {
+  setLoader(true);
+
+  const eGridDiv = document.querySelector('#datatable');
+  eGridDiv.innerHTML = "";
+  
+  context.gridOptions = context.renderers[context.cluster.provider.key](context.data);
+  new agGrid.Grid(eGridDiv, context.gridOptions);
+
+  setLoader(false);
 }

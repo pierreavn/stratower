@@ -7,6 +7,9 @@ export enum ScalewayResourceType {
     IP = "IP",
     VOLUME = "Volume",
     SNAPSHOT = "Snapshot",
+    CONTAINER_REGISTRY = "Container Registry",
+    SERVERLESS_CONTAINER = "Serverless Container",
+    SERVERLESS_FUNCTION = "Serverless Function",
 }
 
 export interface ScalewayProject {
@@ -46,5 +49,10 @@ export interface ScalewayPricing {
         };
         block: number;
         local: number;
+    };
+    containerRegistry: number;
+    serverless: {
+        containers: Record<string, number>;
+        functions: Record<string, number>;
     };
 }

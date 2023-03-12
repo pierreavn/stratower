@@ -43,6 +43,7 @@ Stratower is configured entirely from **environment variables**. In case you pre
 
 ### Example
 ```bash
+PORT=8080
 STRATOWER_CLUSTERS=foo
 
 STRATOWER_foo_PROVIDER=scaleway

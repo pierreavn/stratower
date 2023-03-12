@@ -1,5 +1,6 @@
 const context = {
     cluster: null,
+    data: null,
     gridOptions: null,
     config: null,
     prices: {

@@ -67,7 +67,7 @@ export class ScalewayApiServerlessFunctions extends ScalewayApi {
     protected parseFunction = (fn: ScalewayServerlessFunction): ScalewayResource => {
         const pricePer100ms = this.pricing.serverless.functions[fn.memory_limit] ?? null;
         const pricePerHour = pricePer100ms !== null ? pricePer100ms * 10 * 3_600 : null;
-        const quantity = fn.status === 'ready';
+        const quantity = fn.status === 'ready' ? Math.max(fn.min_scale, 1) : false;
 
         return {
             id: fn.id,
@@ -80,7 +80,7 @@ export class ScalewayApiServerlessFunctions extends ScalewayApi {
             quantity,
             unit: null,
             parentId: null,
-            totalPricePerHour: pricePerHour !== null ? (quantity ? pricePerHour : 0) : null,
+            totalPricePerHour: pricePerHour !== null ? (quantity ? pricePerHour * quantity : 0) : null,
         };
     }
 }

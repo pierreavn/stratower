@@ -30,10 +30,11 @@ export class ScalewayApi {
      */
     public request = async <T = unknown>(endpoint: string, options?: ScalewayApiRequestOptions): Promise<T> => {
         const init: RequestInit = {
-            method: 'GET',
+            method: options?.method ?? 'GET',
             headers: {
-                'X-Auth-Token': this.cluster.config['AUTH_TOKEN'],
-            }
+                'X-Auth-Token': this.cluster.config['SECRET_KEY'],
+            },
+            body: options?.body,
         };
 
         // Append organization ID
@@ -44,8 +45,8 @@ export class ScalewayApi {
         const res = await fetch(`${ScalewayApi.HOSTNAME}${endpoint}`, init);
 
         if (res.status !== 200) {
-            console.error(await res.json());
-            throw new Error("Failed to execute GET request");
+            console.error(res.status, await res.json());
+            throw new Error("Failed to execute Scaleway API request");
         }
 
         return res.json() as T;

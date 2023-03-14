@@ -28,8 +28,6 @@ Here are Scaleway features supported by Stratower:
 * Managed Services:
   * ❌ Transactional Email
   * ❌ IoT Hub
-* Security and Identity:
-  * ❌ Secret Manager
 
 ## Configuration
 ### Example
@@ -40,7 +38,8 @@ STRATOWER_foo_PROVIDER=scaleway
 STRATOWER_foo_NAME=My Cluster
 STRATOWER_foo_ICON=cloud-computing
 STRATOWER_foo_ORGANIZATION_ID=b8fc2b01-b722-4823-947c-64dfb9c840c4
-STRATOWER_foo_AUTH_TOKEN=b8fc2b01-b722-4823-947c-64dfb9c840c4
+STRATOWER_foo_ACCESS_KEY=SCW3M34C3YZPT2VYK4A7
+STRATOWER_foo_SECRET_KEY=b8fc2b01-b722-4823-947c-64dfb9c840c4
 ```
 
 ### Details
@@ -73,9 +72,16 @@ ID of the Scaleway organization.
 STRATOWER_foo_ORGANIZATION_ID=b8fc2b01-b722-4823-947c-64dfb9c840c4
 ```
 
-* `STRATOWER_<cluster>_AUTH_TOKEN` _(**required**, string)_  
-Scaleway secret token, with read-only permissions.
+* `STRATOWER_<cluster>_ACCESS_KEY` _(**required**, string)_  
+Scaleway access key, with read-only permissions.
 
 ```bash
-STRATOWER_foo_AUTH_TOKEN=b8fc2b01-b722-4823-947c-64dfb9c840c4
+STRATOWER_foo_ACCESS_KEY=SCW3M34C3YZPT2VYK4A7
+```
+
+* `STRATOWER_<cluster>_SECRET_KEY` _(**required**, string)_  
+Scaleway associated secret key.
+
+```bash
+STRATOWER_foo_SECRET_KEY=b8fc2b01-b722-4823-947c-64dfb9c840c4
 ```

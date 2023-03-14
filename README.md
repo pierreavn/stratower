@@ -22,7 +22,8 @@ docker run -d \
     -e STRATOWER_CLUSTERS=Scaleway \
     -e STRATOWER_Scaleway_PROVIDER=scaleway \
     -e STRATOWER_Scaleway_ORGANIZATION_ID=<org-id> \
-    -e STRATOWER_Scaleway_AUTH_TOKEN=<auth-token> \
+    -e STRATOWER_Scaleway_ACCESS_KEY=<access-key> \
+    -e STRATOWER_Scaleway_SECRET_KEY=<secret-key> \
     stratower/stratower:latest
 ```
 
@@ -50,7 +51,8 @@ STRATOWER_foo_PROVIDER=scaleway
 STRATOWER_foo_NAME=My Cluster
 STRATOWER_foo_ICON=cloud-computing
 STRATOWER_foo_ORGANIZATION_ID=b8fc2b01-b722-4823-947c-64dfb9c840c4
-STRATOWER_foo_AUTH_TOKEN=b8fc2b01-b722-4823-947c-64dfb9c840c4
+STRATOWER_foo_ACCESS_KEY=SCW3M34C3YZPT2VYK4A7
+STRATOWER_foo_SECRET_KEY=b8fc2b01-b722-4823-947c-64dfb9c840c4
 ```
 
 ### Clusters

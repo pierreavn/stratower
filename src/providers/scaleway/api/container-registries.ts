@@ -31,8 +31,9 @@ export class ScalewayApiContainerRegistries extends ScalewayApi {
      */
     protected parseRegistry = (registry: ScalewayContainerRegistry): ScalewayResource => {
         const pricePerGbPerHour = this.pricing.containerRegistry;
-        const quantity = Math.round(100 * registry.size / 1_000_000_000) / 100;
-        const totalPricePerHour = pricePerGbPerHour * quantity;
+        const quantityInGb = registry.size / 1_000_000_000;
+        const quantity = Math.round(100 * quantityInGb) / 100;
+        const totalPricePerHour = pricePerGbPerHour * quantityInGb;
 
         return {
             id: registry.id,

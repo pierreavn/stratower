@@ -66,9 +66,8 @@
                         </ul>
                     </div>
                 </div>
-
                 <div class="btn-list">
-                    <div class="btn-group" role="group">
+                    <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Price Unit" class="btn-group" role="group">
                         <label id="priceUnitLabel" class="btn dropdown-toggle" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             € / hour
@@ -91,7 +90,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="dropdown">
+                    <div class="dropdown" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Export" style="margin-top: -2px;">
                         <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -132,6 +131,13 @@
                         </div>
                     </div>
                 </div>
+                <button onclick="loadCluster()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Reload" type="button" class="btn btn-default btn-icon ms-2" aria-label="Button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+                    </svg>
+                </button>
             </div>
         </header>
         <div class="page-wrapper">

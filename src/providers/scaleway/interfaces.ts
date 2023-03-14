@@ -1,5 +1,7 @@
 export interface ScalewayApiRequestOptions {
+    method?: string;
     withOrganizationId?: boolean;
+    body?: string;
 }
 
 export enum ScalewayResourceType {
@@ -10,6 +12,7 @@ export enum ScalewayResourceType {
     CONTAINER_REGISTRY = "Container Registry",
     SERVERLESS_CONTAINER = "Serverless Container",
     SERVERLESS_FUNCTION = "Serverless Function",
+    OBJECT_STORAGE = "Object Storage",
 }
 
 export interface ScalewayProject {

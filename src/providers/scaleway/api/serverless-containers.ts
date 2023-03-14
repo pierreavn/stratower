@@ -67,7 +67,7 @@ export class ScalewayApiServerlessContainers extends ScalewayApi {
     protected parseContainer = (container: ScalewayServerlessContainer): ScalewayResource => {
         const pricePer100ms = this.pricing.serverless.containers[container.memory_limit] ?? null;
         const pricePerHour = pricePer100ms !== null ? pricePer100ms * 10 * 3_600 : null;
-        const quantity = container.status === 'ready';
+        const quantity = container.status === 'ready' ? Math.max(container.min_scale, 1) : false;
 
         return {
             id: container.id,
@@ -80,7 +80,7 @@ export class ScalewayApiServerlessContainers extends ScalewayApi {
             quantity,
             unit: null,
             parentId: null,
-            totalPricePerHour: pricePerHour !== null ? (quantity ? pricePerHour : 0) : null,
+            totalPricePerHour: pricePerHour !== null ? (quantity ? pricePerHour * quantity : 0) : null,
         };
     }
 }

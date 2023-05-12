@@ -13,7 +13,7 @@ export class WebserverService {
      * Serve WebServer on given port
      * @param port 
      */
-    static serve(port: number): void {
+    static serve(port: number): Promise<void> {
         LoggerService.info("Starting Webserver");
 
         const reqHandler = async (req: Request) => {
@@ -79,7 +79,7 @@ export class WebserverService {
             return new Response(null, { status: 404 });
         };
         
-        serve(async (req: Request) => {
+        return serve(async (req: Request) => {
           const res = await reqHandler(req);
 
           const pathname = new URL(req.url).pathname;

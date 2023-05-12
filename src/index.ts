@@ -10,6 +10,4 @@ ConfigService.load(version);
 
 // WebServer
 const PORT = ConfigService.getPort() ?? 8080;
-WebserverService.serve(PORT);
-
-LoggerService.info("Stratower ready!");
+await WebserverService.serve(PORT);

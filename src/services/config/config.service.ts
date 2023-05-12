@@ -8,7 +8,7 @@ import { Config, ConfigCluster } from "./config.interfaces.ts";
  */
 export class ConfigService {
     static config: Config;
-    static isValid = false;
+    static isValid: boolean = false;
     static error: string | null = null;
 
     /**
